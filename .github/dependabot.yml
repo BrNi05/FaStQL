@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "DEPS UPDATE: "
+    labels:
+      - dependencies
+    groups:
+      core:
+        patterns:
+          - "^@xterm/addon-fit"
+          - "^@xterm/xterm"
+          - "^dotenv"
+          - "^express"
+          - "^node-pty"
+          - "^socket.io"
+      dev-deps:
+        patterns:
+          - "^eslint"
+          - "^prettier"
+          - "^@eslint"
+          - "^eslint-config-prettier"
+          - "^eslint-plugin-.*"
+          - "^husky"
+          - "^jiti"
+          - "^webpack"
+          - "^webpack-cli"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "ACTIONS UPDATE: "
+    labels:
+      - actions

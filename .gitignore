@@ -137,3 +137,9 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Bundle
+public/bundle.js
+
+# sqlcl default output folder
+output/

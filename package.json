@@ -10,7 +10,7 @@
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:prune": "docker system prune -a -f",
-    "release:docker": "node scripts/release-docker.js",
+    "release:docker": "npm run webpack && node scripts/release-docker.js",
     "format": "prettier --write \"**/*.{js,json,md}\" --log-level silent",
     "lint": "eslint . --ext .js --cache",
     "unsafe": "git config --unset core.hooksPath",

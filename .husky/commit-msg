@@ -1,0 +1,8 @@
+#!/bin/sh
+
+msg=$(cat "$1")
+
+if ! echo "$msg" | grep -qE '^(FEATURE|BUGFIX|SECURITY|DOCS|DEV|REFACTOR|VERSIONING|MISC|SETUP|GITHUB): .{1,}$'; then
+  echo "Invalid commit message format!"
+  exit 1
+fi

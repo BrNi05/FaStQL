@@ -87,12 +87,13 @@ io.on('connection', (socket) => {
     sqlcl.kill();
   });
 
-  // Error handling
+  // Exit handling (SQL: EXIT)
   sqlcl.on('exit', (code) => {
     socket.emit('output', `\r\nSQLcl exited (code ${code})\r\n`);
     socket.disconnect();
   });
 
+  // Error handling
   sqlcl.on('error', (err) => {
     socket.emit('output', `\r\nSQLcl error: ${err.message}\r\n`);
   });

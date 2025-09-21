@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FaStQL GUI</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
+</head>
+<body>
+  <div id="toolbar">
+
+    <div id="title">FaStQL</div>
+
+    <div class="control">
+      <input id="connectInput" placeholder="felhasznalonev@//host:port/SID" />
+      <button id="connectBtn">Connect</button>
+    </div>
+
+    <div class="control">
+      <input id="scriptInput" placeholder="output/script.sql" />
+      <button id="scriptBtn">Run Script</button>
+    </div>
+
+    <div class="control">
+      <input id="spoolInput" placeholder="output/spool.txt" />
+      <button id="spoolOnBtn">Spool ON</button>
+      <button id="spoolOffBtn">Spool OFF</button>
+    </div>
+
+    <div class="control">
+      <button id="clearBtn">Clear Console</button>
+    </div>
+
+    <a id="githubLink" href="https://github.com/BrNi05/FaStQL" target="_blank" title="FaStQL on GitHub">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub" />
+    </a>
+
+  </div>
+
+  <div id="terminalWrapper">
+    <div id="terminal"></div>
+  </div>
+
+  <script src="bundle.js"></script>
+</body>
+</html>

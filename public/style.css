@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Fira Code', monospace, sans-serif;
+  background: #1c1c1c;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 16px;
+  background: #2a2a2a;
+  border-bottom: 1px solid #444;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #2a2a2a;
+}
+
+#title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 20px;
+}
+
+.control {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.control input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #333;
+  color: #eee;
+  font-size: 14px;
+}
+
+#connectInput {
+  width: 320px;
+}
+
+.control button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #444;
+  color: #eee;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.control button:hover {
+  background: #666;
+}
+
+/* Terminal */
+#terminalWrapper {
+  flex: 1;
+  padding-top: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+#terminal {
+  flex: 1;
+  background: #1c1c1c;
+  width: 100%;
+  height: 100%;
+}
+
+/* Scrollbar styling */
+.xterm .xterm-viewport::-webkit-scrollbar {
+  width: 8px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-track {
+  background: #222;
+}
+
+/* GitHub button */
+#githubLink {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+#githubLink img {
+  width: 24px;
+  height: 24px;
+  filter: invert(1);
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+#githubLink img:hover {
+  filter: invert(0.7);
+}
+
+/* Toolbar scrollbar styling */
+#toolbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+#toolbar::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+#toolbar::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+#toolbar::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}

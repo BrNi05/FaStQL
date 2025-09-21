@@ -1,0 +1,17 @@
+services:
+  discos:
+    container_name: FaStQL
+    image: fastql:latest
+    restart: no
+    env_file:
+      - .env.docker
+    network_mode: "bridge"
+    ports:
+      - "3333:3333"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    volumes:
+      - ./output:/fastql/output

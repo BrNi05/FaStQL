@@ -1,0 +1,68 @@
+{
+  "name": "fastql",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "bin": "src/server.js",
+  "scripts": {
+    "start": "npm run webpack && node src/server.js",
+    "webpack": "npx webpack",
+    "docker:build": "npm run webpack && docker build -t fastql:latest .",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:prune": "docker system prune -a -f",
+    "release:docker": "node scripts/release-docker.js",
+    "format": "prettier --write \"**/*.{js,json,md}\" --log-level silent",
+    "lint": "eslint . --ext .js --cache",
+    "unsafe": "git config --unset core.hooksPath",
+    "test": "echo \"No tests specified.\" && exit 0"
+  },
+  "keywords": [
+    "SQL",
+    "sqlcl",
+    "command line",
+    "server",
+    "node",
+    "webgui",
+    "terminal"
+  ],
+  "author": "Barni <szocsbarnabas8@gmail.com> (https://github.com/BrNi05)",
+  "license": "Apache-2.0",
+  "description": "An SQL CLI wrapper that turbocharges your workflow",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrNi05/FaStQL.git"
+  },
+  "homepage": "https://github.com/BrNi05/FaStQL",
+  "bugs": {
+    "url": "https://github.com/BrNi05/FaStQL/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/xterm": "^5.5.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "node-pty": "^1.1.0-beta34",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.5.3",
+    "husky": "^9.1.7",
+    "jiti": "^2.5.1",
+    "prettier": "^3.6.2",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "src",
+    "public"
+  ]
+}

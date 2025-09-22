@@ -5,9 +5,9 @@ WORKDIR /fastql
 COPY package*.json ./
 
 # Install Java and build tools for node-pty
-RUN apt-get update && \
+RUN apt-get update > /dev/null && \
     apt-get install -y --no-install-recommends \
-    openjdk-17-jdk python3 g++ make \
+    openjdk-17-jdk python3 g++ make > /dev/null  \
     && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 # Production release

@@ -73,14 +73,14 @@ function sendConnect() {
 // Toolbar - run script
 function sendScript() {
   const inputElement = document.getElementById('scriptInput');
-  const path = inputElement.value || inputElement.placeholder;
+  const path = 'output/' + inputElement.value || inputElement.placeholder;
   if (path) sendCommand(`START ${path}`);
 }
 
 // Toolbar - spool on
 function sendSpoolOn() {
   const inputElement = document.getElementById('spoolInput');
-  const filename = inputElement.value || inputElement.placeholder;
+  const filename = 'output/' + inputElement.value || inputElement.placeholder;
   if (filename) sendCommand(`SPOOL ${filename}`);
 }
 

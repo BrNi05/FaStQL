@@ -15,6 +15,9 @@ RUN npm ci --omit=dev --omit=optional --silent
 
 COPY . .
 
+# Add executable permissions to sqlcl
+RUN chmod +x /fastql/external/sqlcl/bin/sql
+
 ENV NODE_ENV=production
 
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64

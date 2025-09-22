@@ -4,7 +4,7 @@ import { FitAddon } from '@xterm/addon-fit';
 // Connect to server
 const socket = io();
 
-// Initialize xterm.js
+// Initialize xterm.js terminal
 const term = new Terminal({
   cols: 120,
   rows: 30,
@@ -42,17 +42,17 @@ term.attachCustomKeyEventHandler((event) => {
   return true; // Allow all other events
 });
 
-// Forward SQLcl output to terminal
+// Receive sqlcl output from server
 socket.on('output', (data) => {
   term.write(data);
 });
 
-// Send user input from terminal to backend
+// Send user input from terminal to server
 term.onData((data) => {
   socket.emit('input', data);
 });
 
-// Toolbar - emit to terminal helper
+// Toolbar - emit to server helper
 function sendCommand(cmd) {
   socket.emit('toolbar', cmd);
 }

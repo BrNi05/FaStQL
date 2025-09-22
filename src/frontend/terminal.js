@@ -45,8 +45,29 @@ function sendCommand(cmd) {
 
 // Toolbar - connect to DB
 function sendConnect() {
-  const url = document.getElementById('connectInput').value;
-  if (url) sendCommand(`CONNECT ${url}`);
+  const inputElement = document.getElementById('connectInput');
+
+  let url = String(inputElement.value).trim();
+
+  // If the user provides no input, use the last connection string
+  if (!url) {
+    url = localStorage.getItem('lastConnection') || '';
+  }
+
+  // If only a username is provided, assume the user wants to connect to the default BME server
+  if (!url.includes('@')) {
+    url += '@//rapid.eik.bme.hu:1521/szglab';
+  }
+
+  if (url) {
+    sendCommand(`CONNECT ${url}`);
+
+    // Save the last connection string to localStorage
+    localStorage.setItem('lastConnection', url);
+  }
+
+  // Update input field to reflect the actual connection string used
+  inputElement.value = url;
 }
 
 // Toolbar - run script

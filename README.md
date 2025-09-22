@@ -87,11 +87,11 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 
 > [!IMPORTANT]
 > Since FaStQL runs in a Docker container, a volume mount is needed to exchange data between the host and the container, which is done in the compose config.
-> 
+>
 > As soon as you start the container, a folder named output will appear in the PWD.
-> 
+>
 > The same folder exists in the container as well.
-> 
+>
 > To avoid data loss, FaStQL always prepends `output/` to paths you input using the GUI.
 
 **Terminal:**
@@ -123,13 +123,15 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 
   - Spool OFF:
     - Pressing this button will save all output generated since Spool ON was activated to the specified file.
-   
+
 - **CLEAR**
 
   - This button clears the console.
 
 > [!TIP]
-> `Ctrl + C` and `Ctrl + V` key combinations do not work (like in most terminals). Use the right-click menu.
+> Use `Ctrl + C` and `Ctrl + Shift + V` key combinations or the right-click menu to perform copy and paste actions.
+>
+> `Ctrl + Shift + C` also triggers a copy action, but opens the browser inspector as well.
 
 ---
 
@@ -146,6 +148,6 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 ## Legal
 
 `sqlcl` is licensed under the Oracle Free Use Terms and Conditions.
-The full text of this license is published on https://www.oracle.com/downloads/licenses/oracle-free-license.html
+The full text of this license is published [here](https://www.oracle.com/downloads/licenses/oracle-free-license.html).
 
 FaStQL (excluding SQLcl) is licensed under the [Apache 2.0 License](https://github.com/BrNi05/FaStQL/blob/main/LICENSE).

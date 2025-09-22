@@ -28,6 +28,20 @@ function fitWithMargin(marginCols = 2) {
 window.addEventListener('resize', () => fitWithMargin());
 fitWithMargin();
 
+// Copy (Ctrl+C)
+term.attachCustomKeyEventHandler((event) => {
+  if (event.ctrlKey && event.key.toLowerCase() === 'c') {
+    const selection = term.getSelection();
+    if (selection) {
+      navigator.clipboard.writeText(selection);
+    }
+
+    return false; // Prevent default behavior
+  }
+
+  return true; // Allow all other events
+});
+
 // Forward SQLcl output to terminal
 socket.on('output', (data) => {
   term.write(data);

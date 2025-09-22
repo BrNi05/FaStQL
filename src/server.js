@@ -64,15 +64,16 @@ io.on('connection', (socket) => {
         try {
           const dir = path.dirname(pathToFile);
           if (dir && !fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
+            fs.mkdirSync(dir, { recursive: true }); // sqlcl does not handle directory creation
             socket.emit('output', `\r\nDirectory created: ${dir}\r\n`);
           }
           if (!fs.existsSync(pathToFile)) {
-            fs.writeFileSync(pathToFile, '');
+            fs.writeFileSync(pathToFile, ''); // sqlcl handles file creation, but just to be sure
             socket.emit('output', `\r\nSpool file created: ${pathToFile}\r\n`);
           }
         } catch {
           socket.emit('output', `\r\nError creating directory for spool file: ${pathToFile}\r\n`);
+          console.error(`Error creating directory for spool file: ${pathToFile}`);
         }
       }
     }
@@ -90,16 +91,18 @@ io.on('connection', (socket) => {
   // Exit handling (SQL: EXIT)
   sqlcl.on('exit', (code) => {
     socket.emit('output', `\r\nSQLcl exited (code ${code})\r\n`);
+    console.log(`SQLcl process exited with code ${code}`);
     socket.disconnect();
   });
 
   // Error handling
   sqlcl.on('error', (err) => {
     socket.emit('output', `\r\nSQLcl error: ${err.message}\r\n`);
+    console.error(`SQLcl error: ${err.message}`);
   });
 });
 
 server.listen(PORT, () => {
-  console.log('\n\n==== FaStQL GUI ====');
+  console.log('\n\n==== FaStQL Server ====');
   console.log(`Server running at http://localhost:${PORT}`);
 });

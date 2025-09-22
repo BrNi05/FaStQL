@@ -16,7 +16,7 @@ Describe how you tested your changes.
 
 - [ ] The added code is well-structured and follows best practices
 - [ ] The added code is documented (where needed)
-- [ ] The code compiles and the bot is usable
+- [ ] The code executes and FaStQL is useable
 - [ ] No new issue is introduced
 
 ## Other Notes

@@ -136,6 +136,8 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 
 - FaStQL supports unlimited sessions, allowing you to open multiple windows that connect to the same database simultaneously.
 
+- On Windows, `node-pty` requires the Spectre Mitigations version of some build tools and libraries. More information can be found [here](https://learn.microsoft.com/en-us/cpp/build/reference/qspectre?view=msvc-160).
+
 ---
 
 ## Legal

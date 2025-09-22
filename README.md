@@ -128,6 +128,9 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 
   - This button clears the console.
 
+> [!TIP]
+> `Ctrl + C` and `Ctrl + V` key combinations do not work (like in most terminals). Use the right-click menu.
+
 ---
 
 ## Technical details

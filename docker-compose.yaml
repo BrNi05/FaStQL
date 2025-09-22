@@ -1,8 +1,8 @@
 services:
-  discos:
+  fastql:
     container_name: FaStQL
     image: fastql:latest
-    restart: no
+    restart: unless-stopped
     env_file:
       - .env.docker
     network_mode: "bridge"

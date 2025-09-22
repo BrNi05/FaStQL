@@ -53,7 +53,15 @@ body {
 }
 
 #connectInput {
-  width: 320px;
+  width: 310px;
+}
+
+#scriptInput {
+  width: 140px;
+}
+
+#spoolInput {
+  width: 140px;
 }
 
 .control button {

@@ -1,10 +1,15 @@
 // Load .env
 require('dotenv').config({ quiet: true });
 
+// Networking
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
+
+// Pseudo-terminal
 const pty = require('node-pty');
+
+// Paths and FS
 const path = require('path');
 const fs = require('fs');
 
@@ -54,12 +59,11 @@ io.on('connection', (socket) => {
 
   // Toolbar commands (buttons)
   socket.on('toolbar', (cmd) => {
+    const trimmedCmd = cmd.trim();
+    const pathToFile = trimmedCmd.substring(6);
+
     // Handle spool command (create file if not exists)
-    const trimmed = cmd.trim();
-
-    if (trimmed.startsWith('SPOOL ')) {
-      const pathToFile = trimmed.substring(6).trim();
-
+    if (trimmedCmd.startsWith('SPOOL ')) {
       if (pathToFile !== 'OFF') {
         try {
           const dir = path.dirname(pathToFile);
@@ -75,6 +79,17 @@ io.on('connection', (socket) => {
           socket.emit('output', `\r\nError creating directory for spool file: ${pathToFile}\r\n`);
           console.error(`Error creating directory for spool file: ${pathToFile}`);
         }
+      }
+    }
+
+    // Handle run script command (normalize line endings)
+    if (trimmedCmd.startsWith('START ')) {
+      try {
+        let content = fs.readFileSync(pathToFile, 'utf-8');
+        content = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+        fs.writeFileSync(pathToFile, content, 'utf-8');
+      } catch {
+        console.error(`Error normalizing line endings for script: ${pathToFile}`);
       }
     }
 

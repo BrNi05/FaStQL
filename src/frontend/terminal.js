@@ -15,9 +15,10 @@ const term = new Terminal({
 });
 
 // Fit to container
+const terminalElement = document.getElementById('terminal');
 const fitAddon = new FitAddon();
 term.loadAddon(fitAddon);
-term.open(document.getElementById('terminal'));
+term.open(terminalElement);
 
 function fitWithMargin(marginCols = 2) {
   fitAddon.fit();
@@ -28,14 +29,27 @@ function fitWithMargin(marginCols = 2) {
 window.addEventListener('resize', () => fitWithMargin());
 fitWithMargin();
 
-// Copy (Ctrl+C)
+// Track terminal focus
+let terminalFocused = false;
+terminalElement.addEventListener('focusin', () => (terminalFocused = true));
+terminalElement.addEventListener('focusout', () => (terminalFocused = false));
+
+// Event handler - custom keybindings
 term.attachCustomKeyEventHandler((event) => {
+  // Copy
   if (event.ctrlKey && event.key.toLowerCase() === 'c') {
     const selection = term.getSelection();
     if (selection) {
       navigator.clipboard.writeText(selection);
     }
 
+    return false; // Prevent default behavior
+  }
+  // F11 - fullscreen
+  else if (event.key === 'F11' && !terminalFocused) {
+    // Terminal focus has to be tracked, as enabling fullscreen with a focused terminal is buggy
+    document.body.requestFullscreen();
+    fitWithMargin();
     return false; // Prevent default behavior
   }
 
@@ -129,15 +143,15 @@ document.getElementById('clearBtn').addEventListener('click', sendClear);
 // Handle disconnect event
 let wasDisconnected = false;
 socket.on('disconnect', (reason) => {
-  console.warn('Server disconnected:', reason);
-  term.write('\r\n\r\n*** Disconnected from server ***');
+  console.warn('Backend disconnected:', reason);
+  term.write('\r\n\r\n\x1b[31mFaStQL: Disconnected from backend. Attempting to reconnect...\x1b[0m');
   wasDisconnected = true;
 });
 
 // Handle (re)connect event
 socket.on('connect', () => {
   if (wasDisconnected) {
-    console.log('Connected to server:', socket.id);
+    console.log('Connected to backend:', socket.id);
     location.reload();
     wasDisconnected = false;
   }

@@ -83,6 +83,9 @@ To stop FaStQL: `docker compose down`.
 
 In your browser, visit: `http://localhost:3333/`. The FaStQL GUI will appear.
 
+> [!TIP]
+> You can use F11 to toggle fullscreen mode, but only when the terminal is not focused.
+
 It may take a few seconds for `sqlcl` to start, but you should see the default startup output in a few seconds.
 
 > [!IMPORTANT]
@@ -132,6 +135,10 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 > Use `Ctrl + C` and `Ctrl + Shift + V` key combinations or the right-click menu to perform copy and paste actions.
 >
 > `Ctrl + Shift + C` also triggers a copy action, but opens the browser inspector as well.
+
+**Bottom toolbar:**
+
+The bottom toolbar serves as a help menu, providing quick access to course materials and official sites for reference.”
 
 ---
 

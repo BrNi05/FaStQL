@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FaStQL is a wrapper for the SQL command-line interface (hereafter referred to as `sqcl`), designed to make working with it faster and more convenient.
+FaStQL is a wrapper for the SQL command-line interface (`sqlcl`), designed to make working with it faster and more convenient.
 
 Its development is primarily aligned with the content and assignments of the [Adatbázisok](https://www.db.bme.hu/adatbazisok/) course at BME-VIK.
 
@@ -10,11 +10,14 @@ Its development is primarily aligned with the content and assignments of the [Ad
 
 ## Development
 
-You can track the ongoing development [here](https://github.com/users/BrNi05/projects/4/views/1).
+You can track the ongoing development [here](https://github.com/users/BrNi05/projects/4/views/1). If you encounter a bug or have a feature request, feel free to [open a ticket](https://github.com/BrNi05/FaStQL/issues).
 
-If you’d like to get involved, you can also [contribute](https://github.com/BrNi05/FaStQL/blob/main/.github/CONTRIBUTING.md) to the FaStQL project.
+If you’d like to get involved, you can [contribute](https://github.com/BrNi05/FaStQL/blob/main/.github/CONTRIBUTING.md) to the FaStQL project.
 
 You can also check out the [Docker Hub repo](https://hub.docker.com/repository/docker/brni05/fastql/).
+
+> [!IMPORTANT]
+> On Windows, `node-pty` requires the Spectre Mitigations version of some build tools and libraries. More information can be found [here](https://learn.microsoft.com/en-us/cpp/build/reference/qspectre?view=msvc-160).
 
 ---
 
@@ -55,7 +58,7 @@ services:
 
 ```dotenv
 # The path to the installed sqlcl executable
-# The Docker image has the sqlcl bundled in /fastql/external/sqlcl/bin/sql
+# The Docker image has sqlcl bundled at /fastql/external/sqlcl/bin/sql
 SQLCL_PATH=/fastql/external/sqlcl/bin/sql
 
 # The port on which the server (and the GUI) will be accessible
@@ -67,7 +70,7 @@ Open a terminal in the folder you just created (this should be your current work
 To start FaStQL: `docker compose up -d`.
 
 > [!TIP]
-> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual.
+> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual. The compressed image is about 570 MB, and it expands to nearly 2 GB once extracted.
 
 > [!TIP]
 > You can view container logs using Docker Desktop.
@@ -79,21 +82,21 @@ To stop FaStQL: `docker compose down`.
 ## How to use
 
 > [!WARNING]
-> FaStQL is not tested yet. Use it at your own risk. You can check the currently known bugs [here](https://github.com/BrNi05/FaStQL/issues?q=is%3Aissue%20state%3Aopen%20label%3ABUG).
+> FaStQL is not yet fully tested. Use it at your own risk. You can check the currently known bugs [here](https://github.com/BrNi05/FaStQL/issues?q=is%3Aissue%20state%3Aopen%20label%3ABUG).
 
 In your browser, visit: `http://localhost:3333/`. The FaStQL GUI will appear.
 
 > [!TIP]
 > You can use F11 to toggle fullscreen mode, but only when the terminal is not focused.
 
-It may take a few seconds for `sqlcl` to start, but you should see the default startup output in a few seconds.
+It will take a few seconds for `sqlcl` to start, but you should see the default startup output in a few seconds.
 
 > [!IMPORTANT]
 > Since FaStQL runs in a Docker container, a volume mount is needed to exchange data between the host and the container, which is done in the compose config.
 >
-> As soon as you start the container, a folder named output will appear in the PWD.
+> As soon as you start the container, a folder named `output` will appear in the PWD.
 >
-> The same folder exists in the container as well.
+> The same folder exists in the container as well: `/fastql/output`.
 >
 > To avoid data loss, FaStQL always prepends `output/` to paths you input using the GUI.
 
@@ -109,21 +112,21 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
   - You can connect to a database in multiple ways.
     - Enter a whole connection string, like `uname@//rapid.eik.bme.hu:1521/szglab`.
     - Enter only a username, like `myuname`. FaStQL will expand it like: `myuname@//rapid.eik.bme.hu:1521/szglab`.
-    - If you connected to a database before, just press connect, as FaStQL remembers the last connection string.
+    - If you connected to a database before, just press connect (on `Enter` in the input field), as FaStQL remembers the last connection string.
   
   - Press Connect.
 
 - **RUN**
 
-  - Enter the path to the script you want to run, relative to the `output` folder.
-  - If you leave the field empty, the placeholder path will be used by default.
+  - Enter the path to the script you want to run, relative to the host `output` folder.
+  - If you leave the field empty, the placeholder path will be used by default (with `output/` prepended).
   - You can omit the extension (`.sql`), FaStQL will append it.
 
 - **SPOOL**
 
   - Spool: ✔ / ✖:
     - ✖: spooling is currently disabled.
-    - Enter the path to the spool file you want to use, relative to the `output` folder. If the path does not exists, FaStQL will create it.
+    - Enter the path to the spool file you want to use, relative to the `output` folder. If the path (and/or file) does not exists, FaStQL will create it.
     - If you leave the field empty, the placeholder path will be used by default.
 
     - ✔: spooling is currently enabled - just press the button to disable it.
@@ -133,23 +136,23 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
   - This button clears the console.
 
 > [!TIP]
-> Use `Ctrl + C` and `Ctrl + Shift + V` key combinations or the right-click menu to perform copy and paste actions.
+> Use `Ctrl + C` and `Ctrl + Shift + V` key combinations or the right-click menu to perform copy and paste actions. `Ctrl + V` is buggy (and does not paste) - avoid using it.
 >
 > `Ctrl + Shift + C` also triggers a copy action, but opens the browser inspector as well.
 
 **Bottom toolbar:**
 
-The bottom toolbar serves as a help menu, providing quick access to course materials and official sites for reference.”
+The bottom toolbar serves as a help menu, providing quick access to course materials and official sites for reference.
 
 ---
 
 ## Technical details
 
-- The FaStQL image includes `sqlcl` (version 24.3.1) bundled within it and does not rely on any `sqlcl` installations on the host.
+- The FaStQL image includes `sqlcl` (version 24.3.1) bundled within it and does not rely on any `sqlcl` installations on the host. This is one reason for the big image size.
 
 - FaStQL supports unlimited sessions, allowing you to open multiple windows that connect to the same database simultaneously.
 
-- On Windows, `node-pty` requires the Spectre Mitigations version of some build tools and libraries. More information can be found [here](https://learn.microsoft.com/en-us/cpp/build/reference/qspectre?view=msvc-160).
+- FastQL is fully cross-platform.
 
 ---
 
@@ -158,4 +161,4 @@ The bottom toolbar serves as a help menu, providing quick access to course mater
 `sqlcl` is licensed under the Oracle Free Use Terms and Conditions.
 The full text of this license is published [here](https://www.oracle.com/downloads/licenses/oracle-free-license.html).
 
-FaStQL (excluding SQLcl) is licensed under the [Apache 2.0 License](https://github.com/BrNi05/FaStQL/blob/main/LICENSE).
+FaStQL (excluding `sqlcl`) is licensed under the [Apache 2.0 License](https://github.com/BrNi05/FaStQL/blob/main/LICENSE).

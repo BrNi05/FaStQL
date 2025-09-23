@@ -91,28 +91,54 @@ function sendScript() {
   if (path) sendCommand(`START ${path}`);
 }
 
-// Toolbar - spool on
-function sendSpoolOn() {
-  const inputElement = document.getElementById('spoolInput');
-  const filename = 'output/' + inputElement.value || inputElement.placeholder;
-  if (filename) sendCommand(`SPOOL ${filename}`);
-}
+// Toolbar - spool
+let spoolActive = false;
 
-// Toolbar - spool off
-function sendSpoolOff() {
-  sendCommand('SPOOL OFF');
+const spoolBtn = document.getElementById('spoolBtn');
+const spoolInput = document.getElementById('spoolInput');
+
+function toogleSpool() {
+  const filename = 'output/' + (spoolInput.value || spoolInput.placeholder);
+
+  // Spool: active, toogle off
+  if (spoolActive) {
+    sendCommand('SPOOL OFF');
+    spoolBtn.textContent = 'SPOOL ✖';
+    spoolActive = false;
+  }
+  // Spool: inactive, toogle on
+  else {
+    sendCommand(`SPOOL ${filename}`);
+    spoolBtn.textContent = 'SPOOL ✔';
+    spoolActive = true;
+  }
 }
 
 // Toolbar - clear screen
 function sendClear() {
   sendCommand('CLEAR SCREEN');
   term.clear();
-  //term.reset();
 }
 
 // Add event listeners
 document.getElementById('connectBtn').addEventListener('click', sendConnect);
 document.getElementById('scriptBtn').addEventListener('click', sendScript);
-document.getElementById('spoolOnBtn').addEventListener('click', sendSpoolOn);
-document.getElementById('spoolOffBtn').addEventListener('click', sendSpoolOff);
+spoolBtn.addEventListener('click', toogleSpool);
 document.getElementById('clearBtn').addEventListener('click', sendClear);
+
+// Handle disconnect event
+let wasDisconnected = false;
+socket.on('disconnect', (reason) => {
+  console.warn('Server disconnected:', reason);
+  term.write('\r\n\r\n*** Disconnected from server ***');
+  wasDisconnected = true;
+});
+
+// Handle (re)connect event
+socket.on('connect', () => {
+  if (wasDisconnected) {
+    console.log('Connected to server:', socket.id);
+    location.reload();
+    wasDisconnected = false;
+  }
+});

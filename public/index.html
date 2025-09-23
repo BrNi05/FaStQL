@@ -14,18 +14,17 @@
 
     <div class="control">
       <input id="connectInput" placeholder="uname@//rapid.eik.bme.hu:1521/szglab" />
-      <button id="connectBtn">Connect</button>
+      <button id="connectBtn">CONNECT</button>
     </div>
 
     <div class="control">
       <input id="scriptInput" placeholder="script.sql" />
-      <button id="scriptBtn">Run Script</button>
+      <button id="scriptBtn">RUN</button>
     </div>
 
     <div class="control">
       <input id="spoolInput" placeholder="spool.txt" />
-      <button id="spoolOnBtn">Spool ON</button>
-      <button id="spoolOffBtn">Spool OFF</button>
+      <button id="spoolBtn">SPOOL ✖</button>
     </div>
 
     <div class="control">
@@ -50,6 +49,7 @@
       location.reload();
     });
 
+    // Send input field content on Enter key down
     function attachEnter(inputId, buttonId) {
       const input = document.getElementById(inputId);
       const button = document.getElementById(buttonId);
@@ -63,7 +63,7 @@
 
     attachEnter('connectInput', 'connectBtn');
     attachEnter('scriptInput', 'scriptBtn');
-    attachEnter('spoolInput', 'spoolOnBtn');
+    attachEnter('spoolInput', 'spoolBtn');
   </script>
 </body>
 </html>

@@ -101,7 +101,7 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 
 **Top toolbar:**
 
-- **Connection**
+- **CONNECT**
 
   - You can connect to a database in multiple ways.
     - Enter a whole connection string, like `uname@//rapid.eik.bme.hu:1521/szglab`.
@@ -110,19 +110,19 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
   
   - Press Connect.
 
-- **Run Script**
+- **RUN**
 
   - Enter the path to the script you want to run, relative to the `output` folder.
   - If you leave the field empty, the placeholder path will be used by default.
 
-- **Spool**
+- **SPOOL**
 
-  - Spool ON:
+  - Spool: ✔ / ✖:
+    - ✖: spooling is currently disabled.
     - Enter the path to the spool file you want to use, relative to the `output` folder. If the path does not exists, FaStQL will create it.
     - If you leave the field empty, the placeholder path will be used by default.
 
-  - Spool OFF:
-    - Pressing this button will save all output generated since Spool ON was activated to the specified file.
+    - ✔: spooling is currently enabled - just press the button to disable it.
 
 - **CLEAR**
 

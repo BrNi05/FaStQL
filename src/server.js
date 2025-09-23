@@ -25,7 +25,16 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use(express.static(path.join(__dirname, '../public')));
+// Serve static files with no caching
+app.use(
+  express.static(path.join(__dirname, '../public'), {
+    setHeaders: (res) => {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    },
+  })
+);
 
 io.on('connection', (socket) => {
   console.log(`\nFaStQL GUI connected. Session ID: ${socket.id}`);

@@ -101,8 +101,12 @@ function sendConnect() {
 // Toolbar - run script
 function sendScript() {
   const inputElement = document.getElementById('scriptInput');
-  const path = 'output/' + inputElement.value || inputElement.placeholder;
-  if (path) sendCommand(`START ${path}`);
+  const path = 'output/' + (inputElement.value || inputElement.placeholder);
+
+  // Append .sql extension if not present
+  const finalPath = path.endsWith('.sql') ? path : path + '.sql';
+
+  if (path) sendCommand(`START ${finalPath}`);
 }
 
 // Toolbar - spool

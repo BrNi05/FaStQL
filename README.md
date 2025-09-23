@@ -117,6 +117,7 @@ It may take a few seconds for `sqlcl` to start, but you should see the default s
 
   - Enter the path to the script you want to run, relative to the `output` folder.
   - If you leave the field empty, the placeholder path will be used by default.
+  - You can omit the extension (`.sql`), FaStQL will append it.
 
 - **SPOOL**
 

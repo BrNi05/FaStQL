@@ -12,13 +12,16 @@ Tag any issues that this PR solves. Eg.: Fixes #99
 
 Describe how you tested your changes.
 
-## Checklist
+<!-- Checklist -->
 
-- [ ] The added code is well-structured and follows best practices
-- [ ] The added code is documented (where needed)
-- [ ] The code executes and FaStQL is useable
-- [ ] No new issue is introduced
+<!-- The added code is well-structured and follows best practices -->
+<!-- The added code is documented (where needed) -->
+<!-- README is updated (if needed) -->
+<!-- The code executes and FaStQL is useable -->
+<!-- No new issue is introduced -->
 
 ## Other Notes
 
 Anything else others should know that doesn’t fit the sections above.
+
+<!-- Remove if there are no other notes -->

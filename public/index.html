@@ -49,6 +49,21 @@
     title.addEventListener('click', () => {
       location.reload();
     });
+
+    function attachEnter(inputId, buttonId) {
+      const input = document.getElementById(inputId);
+      const button = document.getElementById(buttonId);
+
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          button.click();
+        }
+      });
+    }
+
+    attachEnter('connectInput', 'connectBtn');
+    attachEnter('scriptInput', 'scriptBtn');
+    attachEnter('spoolInput', 'spoolOnBtn');
   </script>
 </body>
 </html>

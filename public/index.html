@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>FaStQL GUI</title>
+  <title>FaStQL</title>
   <link rel="stylesheet" href="style.css">
   <script src="/socket.io/socket.io.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
@@ -41,13 +41,25 @@
     <div id="terminal"></div>
   </div>
 
-  <script src="bundle.js"></script>
+  <div id="bottomToolbar">
+    <div class="buttonGroup">
+      <a href="https://db.bme.hu/~gajdos/Adatbazisok2019.pdf" class="bt controlBtn" target="_blank">Tankönyv</a>
+      <a href="https://docs.google.com/document/d/1tV3mGctq9Z0feGOEawKl322oKvYfJIWMNmFYm1KOpG8/edit?usp=sharing" class="bt controlBtn" target="_blank">Kifejezések</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/" class="bt controlBtn" target="_blank">Labor infok</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/files/hallgatoi-segedlet-teljes2022.pdf" class="bt controlBtn" target="_blank">Labor jegyzet</a>
+      <a href="https://www.db.bme.hu/jegyzokonyv/tudnivalok/" class="bt controlBtn" target="_blank">Jegyzőkönyv</a>
+    </div>
 
+    <div class="buttonGroup">
+      <a href="https://fecske.db.bme.hu/" class="bt controlBtn" target="_blank">LaborAdmin</a>
+      <a href="https://www.db.bme.hu/adatbazisok/eredmenyek" class="bt controlBtn" target="_blank">Eredmények</a>
+    </div>
+  </div>
+
+  <script src="bundle.js"></script>
   <script>
     const title = document.getElementById('title');
-    title.addEventListener('click', () => {
-      location.reload();
-    });
+    title.addEventListener('click', () => location.reload());
 
     // Send input field content on Enter key down
     function attachEnter(inputId, buttonId) {
@@ -55,9 +67,7 @@
       const button = document.getElementById(buttonId);
 
       input.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          button.click();
-        }
+        if (event.key === 'Enter') button.click();
       });
     }
 

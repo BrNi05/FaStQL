@@ -1,9 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/frontend/terminal.js',
+  entry: {
+    terminal: './src/frontend/terminal.js',
+    version: './src/frontend/version.js',
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public'),
   },
   mode: 'production',

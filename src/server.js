@@ -36,6 +36,28 @@ app.use(
   })
 );
 
+// Version check endpoint
+app.get('/version', async (req, res) => {
+  try {
+    // Current version
+    const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json')));
+    const currentVersion = pkg.version;
+
+    // Latest version
+    const dockerRes = await fetch(
+      'https://hub.docker.com/v2/repositories/brni05/fastql/tags?page_size=1&page=1&ordering=last_updated'
+    );
+    if (!dockerRes.ok) throw new Error();
+
+    const jsonDocker = await dockerRes.json();
+    const latest = jsonDocker.results[0].name;
+
+    res.json({ currentVersion, latest });
+  } catch {
+    res.status(500).json();
+  }
+});
+
 io.on('connection', (socket) => {
   console.log(`\nFaStQL GUI connected. Session ID: ${socket.id}`);
 

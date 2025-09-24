@@ -61,7 +61,14 @@
     </div>
   </div>
 
-  <script src="bundle.js"></script>
+  <div id="updateModal" class="update-modal">
+    <div class="update-title">FaStQL Update</div>
+    <div class="update-message"></div>
+    <button class="update-close">OK</button>
+  </div>
+
+  <script src="terminal.bundle.js"></script>
+  <script src="version.bundle.js"></script>
   <script>
     const title = document.getElementById('title');
     title.addEventListener('click', () => location.reload());

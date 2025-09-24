@@ -213,3 +213,50 @@ body {
   font-size: 14px;
   text-align: center;
 }
+
+/* Update modal */
+.update-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1c1c1c;
+  color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+  z-index: 10000;
+  width: 450px;
+  max-width: 90%;
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+}
+
+.update-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.update-message {
+  white-space: pre-wrap;
+  font-size: 16px;
+  margin-bottom: 26px;
+}
+
+.update-close {
+  margin-top: 10px;
+  float: right;
+  background: #333333;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.update-close:hover {
+  background: #555555;
+}
+

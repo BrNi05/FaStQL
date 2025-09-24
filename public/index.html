@@ -46,9 +46,13 @@
     <div class="buttonGroup">
       <a href="https://db.bme.hu/~gajdos/Adatbazisok2019.pdf" class="bt controlBtn" target="_blank">Tankönyv</a>
       <a href="https://docs.google.com/document/d/1tV3mGctq9Z0feGOEawKl322oKvYfJIWMNmFYm1KOpG8/edit?usp=sharing" class="bt controlBtn" target="_blank">Kifejezések</a>
-      <a href="https://www.db.bme.hu/adatbazisok/labor/" class="bt controlBtn" target="_blank">Labor infok</a>
-      <a href="https://www.db.bme.hu/adatbazisok/labor/files/hallgatoi-segedlet-teljes2022.pdf" class="bt controlBtn" target="_blank">Labor jegyzet</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/" class="bt controlBtn" target="_blank">Lab Infok</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/files/hallgatoi-segedlet-teljes2022.pdf" class="bt controlBtn" target="_blank">Lab Jegyzet</a>
       <a href="https://www.db.bme.hu/jegyzokonyv/tudnivalok/" class="bt controlBtn" target="_blank">Jegyzőkönyv</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/oracle1-labor/" class="bt controlBtn" target="_blank">Oracle Lab</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/sql123-labor/" class="bt controlBtn" target="_blank">SQL-123 Lab</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/sql123-labor/hallgatoi-utmutato" class="bt controlBtn" target="_blank">SQL Lab Guide</a>
+      <a href="https://www.db.bme.hu/adatbazisok/labor/optimalizalas-labor/hallgatoi-utmutato" class="bt controlBtn" target="_blank">QO Lab</a>
     </div>
 
     <div class="buttonGroup">
@@ -57,7 +61,14 @@
     </div>
   </div>
 
-  <script src="bundle.js"></script>
+  <div id="updateModal" class="update-modal">
+    <div class="update-title">FaStQL Update</div>
+    <div class="update-message"></div>
+    <button class="update-close">OK</button>
+  </div>
+
+  <script src="terminal.bundle.js"></script>
+  <script src="version.bundle.js"></script>
   <script>
     const title = document.getElementById('title');
     title.addEventListener('click', () => location.reload());

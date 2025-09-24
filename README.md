@@ -70,7 +70,7 @@ Open a terminal in the folder you just created (this should be your current work
 To start FaStQL: `docker compose up -d`.
 
 > [!TIP]
-> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual. The compressed image is about 570 MB, and it expands to nearly 2 GB once extracted.
+> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual. The compressed image is about 420 MB, and it expands to 1.45 GB once extracted.
 
 > [!TIP]
 > You can view container logs using Docker Desktop.
@@ -143,6 +143,9 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
 **Bottom toolbar:**
 
 The bottom toolbar serves as a help menu, providing quick access to course materials and official sites for reference.
+
+> [!TIP]
+> To update FaStQL: `docker pull brni05/fastql:latest`, then restart the container.
 
 ---
 

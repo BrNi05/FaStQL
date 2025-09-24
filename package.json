@@ -1,6 +1,6 @@
 {
   "name": "fastql",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "src/server.js",
   "bin": "src/server.js",
   "scripts": {
@@ -45,6 +45,7 @@
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "node-pty": "^1.1.0-beta35",
+    "semver": "^7.7.2",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {

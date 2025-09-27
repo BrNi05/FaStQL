@@ -18,6 +18,8 @@ body:
       label: Specification
       description: An in-depth description of the requested feature. How should it work? How shouldn't it?
       placeholder: It should...
+    validations:
+      required: true
 
   - type: textarea
     id: acceptance-criteria

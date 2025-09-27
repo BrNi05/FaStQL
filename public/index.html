@@ -14,7 +14,8 @@
     <div id="title">FaStQL</div>
 
     <div class="control">
-      <input id="connectInput" placeholder="uname@//rapid.eik.bme.hu:1521/szglab" />
+      <input id="unameInput" placeholder="username" />
+      <input id="pwdInput" placeholder="password" />
       <button id="connectBtn">CONNECT</button>
     </div>
 
@@ -83,7 +84,8 @@
       });
     }
 
-    attachEnter('connectInput', 'connectBtn');
+    attachEnter('unameInput', 'connectBtn');
+    attachEnter('pwdInput', 'connectBtn');
     attachEnter('scriptInput', 'scriptBtn');
     attachEnter('spoolInput', 'spoolBtn');
   </script>

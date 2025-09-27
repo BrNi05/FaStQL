@@ -109,12 +109,10 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
 
 - **CONNECT**
 
-  - You can connect to a database in multiple ways.
-    - Enter a whole connection string, like `uname@//rapid.eik.bme.hu:1521/szglab`.
-    - Enter only a username, like `myuname`. FaStQL will expand it like: `myuname@//rapid.eik.bme.hu:1521/szglab`.
-    - If you connected to a database before, just press connect (on `Enter` in the input field), as FaStQL remembers the last connection string.
-  
-  - Press Connect.
+  - For the first time, enter your username and password.
+    - FaStQL will remember your credentials for future use - just press Enter next time to auto-fill the fields.
+    - The connection string format is: `uname/psw@//rapid.eik.bme.hu:1521/szglab`.
+  - Press CONNECT.
 
 - **RUN**
 

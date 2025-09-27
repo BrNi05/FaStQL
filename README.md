@@ -70,7 +70,7 @@ Open a terminal in the folder you just created (this should be your current work
 To start FaStQL: `docker compose up -d`.
 
 > [!TIP]
-> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual. The compressed image is about 420 MB, and it expands to 1.45 GB once extracted.
+> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual. The compressed image is about 370 MB, and it expands to 1.3 GB once extracted.
 
 > [!TIP]
 > You can view container logs using Docker Desktop.

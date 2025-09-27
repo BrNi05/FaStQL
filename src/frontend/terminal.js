@@ -73,29 +73,37 @@ function sendCommand(cmd) {
 
 // Toolbar - connect to DB
 function sendConnect() {
-  const inputElement = document.getElementById('connectInput');
+  const userInputElement = document.getElementById('unameInput');
+  const pwdInputElement = document.getElementById('pwdInput');
 
-  let url = String(inputElement.value).trim();
+  let username = String(userInputElement.value).trim();
+  let password = String(pwdInputElement.value).trim();
 
-  // If the user provides no input, use the last connection string
-  if (!url) {
-    url = localStorage.getItem('lastConnection') || '';
+  // If the user provides no username, use the stored one
+  if (!username) {
+    username = localStorage.getItem('lastUsername') || 'neptun';
   }
 
-  // If only a username is provided, assume the user wants to connect to the default BME server
-  if (!url.includes('@')) {
-    url += '@//rapid.eik.bme.hu:1521/szglab';
+  // If the user provides no password, use the stored one or fallback to default password
+  if (!password) {
+    password = localStorage.getItem('lastPassword') || username.toUpperCase();
   }
 
-  if (url) {
-    sendCommand(`CONNECT ${url}`);
+  // Construct the connection string
+  const url = `${username}/${password}@//rapid.eik.bme.hu:1521/szglab`;
 
-    // Save the last connection string to localStorage
-    localStorage.setItem('lastConnection', url);
+  // Save the last used username and password to localStorage
+  localStorage.setItem('lastUsername', username);
+  if (!/^\*+$/.test(password)) {
+    localStorage.setItem('lastPassword', password); // Do not accidentally save the masked password
   }
 
-  // Update input field to reflect the actual connection string used
-  inputElement.value = url;
+  // Send the CONNECT command to the server
+  sendCommand(`CONNECT ${url}`);
+
+  // Update input fields to reflect the user values
+  userInputElement.value = username;
+  pwdInputElement.value = password.replace(/./g, '*');
 }
 
 // Toolbar - run script

@@ -59,16 +59,9 @@ body {
 }
 
 /* Input field width override */
-#connectInput {
-  width: 310px;
-}
-
-/* Input field width override */
-#scriptInput {
-  width: 120px;
-}
-
-/* Input field width override */
+#unameInput,
+#pwdInput,
+#scriptInput,
 #spoolInput {
   width: 120px;
 }
@@ -259,4 +252,3 @@ body {
 .update-close:hover {
   background: #555555;
 }
-

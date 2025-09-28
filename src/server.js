@@ -17,7 +17,7 @@ const fs = require('fs');
 const SQLCL_PATH = process.env.SQLCL_PATH;
 const PORT = process.env.PORT;
 if (!PORT || !SQLCL_PATH) {
-  console.error('\nEnv vars are not supplied.');
+  console.error('\nEnv vars are not supplied. Exiting...\n');
   process.exit(1);
 }
 

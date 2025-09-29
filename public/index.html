@@ -30,6 +30,10 @@
     </div>
 
     <div class="control">
+      <button id="openSqlEditorBtn" title="SQL Editor">COMPOSER</button>
+    </div>
+
+    <div class="control">
       <button id="clearBtn">CLEAR</button>
     </div>
 
@@ -62,14 +66,42 @@
     </div>
   </div>
 
-  <div id="updateModal" class="update-modal">
-    <div class="update-title">FaStQL Update</div>
-    <div class="update-message"></div>
-    <button class="update-close">OK</button>
+  <div id="alertModal" class="alert-modal">
+    <div class="alert-title">Alert</div>
+    <div class="alert-message">Alert message</div>
+    <button class="alert-close">OK</button>
+  </div>
+
+  <div id="sqlEditorWindow" class="sql-editor-window">
+    <div class="sql-editor-titlebar">
+      <span>Composer</span>
+      <button class="close-btn">&times;</button>
+    </div>
+
+    <div class="sql-editor-toolbar">
+      <select id="sqlFileDropdown">
+        <option value="">NO SAVED SCRIPTS</option>
+      </select>
+      <input type="text" id="saveSqlInput" placeholder=""/>
+      <button id="saveSqlBtn">SAVE</button>
+      <button id="runSqlBtn">RUN</button>
+    </div>
+  
+    <textarea
+      id="sqlEditorTextarea"
+      placeholder=""
+      spellcheck="false"
+      autocorrect="off"
+      autocapitalize="off"
+      autocomplete="off"
+    ></textarea>
+
+    <div class="resize-handle"></div>
   </div>
 
   <script src="terminal.bundle.js"></script>
   <script src="version.bundle.js"></script>
+ <script src="alert.bundle.js"></script>
   <script>
     const title = document.getElementById('title');
     title.addEventListener('click', () => location.reload());

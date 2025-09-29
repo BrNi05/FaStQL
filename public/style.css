@@ -67,7 +67,8 @@ body {
 }
 
 /* Buttons */
-.control button {
+.control button,
+#openSqlEditorBtn {
   padding: 6px 12px;
   border-radius: 6px;
   border: none;
@@ -80,7 +81,8 @@ body {
 
 /* Buttons on hover */
 .control button:hover,
-#bottomToolbar .bt:hover {
+#bottomToolbar .bt:hover,
+#openSqlEditorBtn:hover {
   background: #666;
 }
 
@@ -207,8 +209,8 @@ body {
   text-align: center;
 }
 
-/* Update modal */
-.update-modal {
+/* Alert modal */
+.alert-modal {
   display: none;
   position: fixed;
   top: 50%;
@@ -225,19 +227,19 @@ body {
   font-family: 'Cascadia Code', 'Fira Code', monospace;
 }
 
-.update-title {
+.alert-title {
   font-weight: bold;
   margin-bottom: 20px;
   font-size: 22px;
 }
 
-.update-message {
+.alert-message {
   white-space: pre-wrap;
   font-size: 16px;
   margin-bottom: 26px;
 }
 
-.update-close {
+.alert-close {
   margin-top: 10px;
   float: right;
   background: #333333;
@@ -249,6 +251,142 @@ body {
   font-size: 16px;
 }
 
-.update-close:hover {
+.alert-close:hover {
   background: #555555;
+}
+
+/* Composer (SQL Editor) window */
+.sql-editor-window {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 900px;
+  height: 500px;
+  background: #2b2b2b;
+  color: #eee;
+  border: 2px solid #444;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  z-index: 2000;
+  flex-direction: column;
+  font-family: 'Fira Code', monospace;
+  overflow: hidden;
+}
+
+/* Title bar */
+.sql-editor-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #444;
+  padding: 6px 10px;
+  cursor: move;
+  font-weight: bold;
+}
+
+/* Close button */
+.sql-editor-titlebar .close-btn {
+  background: transparent;
+  border: none;
+  color: #eee;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.2s;
+}
+
+/* Toolbar */
+.sql-editor-toolbar {
+  display: flex;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #333;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* Save name input */
+#saveSqlInput {
+  width: 120px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background: #333;
+  color: #eee;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+
+/* Inputs & select */
+.sql-editor-toolbar input, 
+.sql-editor-toolbar select, 
+.sql-editor-toolbar button {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background: #2b2b2b;
+  color: #eee;
+  font-size: 14px;
+}
+
+/* Textarea for SQL code */
+#sqlEditorTextarea {
+  flex: 1;
+  width: 100%;
+  background: #1c1c1c;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  resize: none;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  overflow: auto;
+}
+
+/* Resize handle */
+.sql-editor-window .resize-handle {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  cursor: se-resize;
+  z-index: 3000;
+  background: transparent;
+}
+
+.sql-editor-window .resize-handle::after {
+  content: '⇘';
+  font-size: 14px;
+  color: #888;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+/* Scrollbar styling for Composer textarea */
+#sqlEditorTextarea::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#sqlEditorTextarea::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 5px;
+}
+
+#sqlEditorTextarea::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+#sqlEditorTextarea::-webkit-scrollbar-track {
+  background: #222;
+  border-radius: 5px;
+}
+
+#sqlEditorTextarea {
+  scrollbar-width: thin;
+  scrollbar-color: #555 #222;
 }

@@ -25,6 +25,9 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+// Parse JSON bodies
+app.use(express.json());
+
 // Serve static files with no caching
 app.use(
   express.static(path.join(__dirname, '../public'), {
@@ -35,6 +38,31 @@ app.use(
     },
   })
 );
+
+// Create directories if not exist
+const outputDir = path.join(__dirname, '..', 'output');
+const composerDir = path.join(outputDir, '.composer');
+const tempDir = path.join(composerDir, '.temp');
+
+if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
+if (!fs.existsSync(composerDir)) fs.mkdirSync(composerDir);
+if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
+
+// Clear output/.composer/.temp dir on startup
+function clearTempDir() {
+  fs.readdirSync(tempDir).forEach((file) => {
+    const filePath = path.join(tempDir, file);
+    if (fs.lstatSync(filePath).isFile()) fs.unlinkSync(filePath);
+  });
+}
+
+clearTempDir();
+
+// Clear output/.composer/.temp dir on SIGTERM (docker compose down)
+process.on('SIGTERM', () => {
+  clearTempDir();
+  process.exit(0);
+});
 
 // Version check endpoint
 app.get('/version', async (req, res) => {
@@ -53,9 +81,59 @@ app.get('/version', async (req, res) => {
     const latest = jsonDocker.results[0].name;
 
     res.json({ currentVersion, latest });
-  } catch {
-    res.status(500).json();
+  } catch (err) {
+    res.status(500).json({ error: err });
   }
+});
+
+// Composer GET endpoint (list)
+app.get('/composer', (req, res) => {
+  const folderPath = path.join(__dirname, '..', 'output', '.composer');
+  fs.readdir(folderPath, (err, files) => {
+    if (err) {
+      console.error('FaStQL: failed to GET', err);
+      return res.sendStatus(500);
+    }
+
+    // Remove .sql suffix
+    files = files.filter((file) => file.endsWith('.sql')).map((file) => file.slice(0, -4));
+
+    res.json(files);
+  });
+});
+
+// Composer GET endpoint (file content)
+app.get('/composer/:filename', (req, res) => {
+  const { filename } = req.params;
+
+  const filePath = path.join(__dirname, '..', 'output', '.composer', filename);
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('FaStQL: failed to GET', err);
+      return res.sendStatus(500);
+    }
+
+    res.json({ filename, content: data });
+  });
+});
+
+// Composer POST endpoint
+app.post('/composer', (req, res) => {
+  const { subPath, name, content } = req.body;
+
+  const baseDir = path.join(__dirname, '..', 'output', '.composer');
+  const targetDir = path.join(baseDir, subPath);
+  const targetPath = path.join(targetDir, name);
+
+  fs.writeFile(targetPath, content, 'utf8', (err) => {
+    if (err) {
+      console.error('FaStQL: failed to POST', err);
+      return res.sendStatus(500);
+    }
+
+    res.sendStatus(200);
+  });
 });
 
 io.on('connection', (socket) => {
@@ -108,7 +186,7 @@ io.on('connection', (socket) => {
           }
         } catch {
           socket.emit('output', `\r\nError creating directory for spool file: ${pathToFile}\r\n`);
-          console.error(`Error creating directory for spool file: ${pathToFile}`);
+          console.error(`FaStQL: error creating directory for spool file: ${pathToFile}`);
         }
       }
     }
@@ -120,7 +198,7 @@ io.on('connection', (socket) => {
         content = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
         fs.writeFileSync(pathToFile, content, 'utf-8');
       } catch {
-        console.error(`Error normalizing line endings for script: ${pathToFile}`);
+        console.error(`FaStQL: error normalizing line endings for script: ${pathToFile}`);
       }
     }
 
@@ -144,7 +222,7 @@ io.on('connection', (socket) => {
   // Error handling
   sqlcl.on('error', (err) => {
     socket.emit('output', `\r\nSQLcl error: ${err.message}\r\n`);
-    console.error(`SQLcl error: ${err.message}`);
+    console.error(`FaStQL: SQLcl error: ${err.message}`);
   });
 });
 

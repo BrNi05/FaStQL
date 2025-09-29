@@ -1,6 +1,6 @@
 {
   "name": "fastql",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "src/server.js",
   "bin": "src/server.js",
   "scripts": {
@@ -42,6 +42,7 @@
   "dependencies": {
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
+    "axios": "^1.12.2",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "node-pty": "^1.1.0-beta35",

@@ -1,8 +1,14 @@
 import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 
+// Internal
+import { initSqlEditor } from './composer.js';
+
 // Connect to server
 const socket = io();
+
+// Initialize SQL Editor
+initSqlEditor(socket);
 
 // Initialize xterm.js terminal
 const term = new Terminal({

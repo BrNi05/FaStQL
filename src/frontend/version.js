@@ -1,14 +1,6 @@
 const semver = require('semver');
 
-function showUpdateModal(message) {
-  const modal = document.getElementById('updateModal');
-  modal.querySelector('.update-message').textContent = message;
-  modal.style.display = 'block';
-
-  modal.querySelector('.update-close').onclick = () => {
-    modal.style.display = 'none';
-  };
-}
+import { showAlert } from './alert.js';
 
 async function checkVersion() {
   try {
@@ -18,7 +10,8 @@ async function checkVersion() {
 
     // Show modal if a newer version exists
     if (semver.lt(currentVersion, latest)) {
-      showUpdateModal(
+      showAlert(
+        'FaStQL Update',
         `A new version is available! ${currentVersion} -> ${latest}\n\nUse: docker pull brni05/fastql:latest\nThen: restart the container`
       );
     }

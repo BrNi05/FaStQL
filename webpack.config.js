@@ -4,6 +4,8 @@ module.exports = {
   entry: {
     terminal: './src/frontend/terminal.js',
     version: './src/frontend/version.js',
+    composer: './src/frontend/composer.js',
+    alert: './src/frontend/alert.js',
   },
   output: {
     filename: '[name].bundle.js',

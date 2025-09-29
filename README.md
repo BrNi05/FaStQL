@@ -81,9 +81,6 @@ To stop FaStQL: `docker compose down`.
 
 ## How to use
 
-> [!WARNING]
-> FaStQL is not yet fully tested. Use it at your own risk. You can check the currently known bugs [here](https://github.com/BrNi05/FaStQL/issues?q=is%3Aissue%20state%3Aopen%20label%3ABUG).
-
 In your browser, visit: `http://localhost:3333/`. The FaStQL GUI will appear.
 
 > [!TIP]
@@ -128,6 +125,10 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
     - If you leave the field empty, the placeholder path will be used by default.
 
     - ✔: spooling is currently enabled - just press the button to disable it.
+
+- **COMPOSER**
+
+  - Use Composer to create and manage multi-line SQL commands. You can save them, load them, and execute them.
 
 - **CLEAR**
 

@@ -1,0 +1,75 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start FaStQL",
+      "type": "npm",
+      "script": "start",
+      "group": "build",
+      "detail": "Runs webpack and starts the Node.js server"
+    },
+    {
+      "label": "Build with Webpack",
+      "type": "npm",
+      "script": "webpack",
+      "group": "build",
+      "detail": "Runs webpack manually"
+    },
+    {
+      "label": "Docker: Build",
+      "type": "npm",
+      "script": "docker:build",
+      "group": "build",
+      "detail": "Builds Docker image after webpack"
+    },
+    {
+      "label": "Docker: Start",
+      "type": "npm",
+      "script": "docker:up",
+      "group": "none",
+      "detail": "Starts the Docker container"
+    },
+    {
+      "label": "Docker: Stop",
+      "type": "npm",
+      "script": "docker:down",
+      "group": "none",
+      "detail": "Stops and removes the Docker container"
+    },
+    {
+      "label": "Docker: Prune",
+      "type": "npm",
+      "script": "docker:prune",
+      "group": "none",
+      "detail": "Cleans up dangling Docker images and cache"
+    },
+    {
+      "label": "Release: Docker",
+      "type": "npm",
+      "script": "release:docker",
+      "group": "build",
+      "detail": "Runs the full release process for Docker. Used in CI/CD pipeline."
+    },
+    {
+      "label": "Format",
+      "type": "npm",
+      "script": "format",
+      "group": "none",
+      "detail": "Formats JS, JSON, and Markdown files using Prettier"
+    },
+    {
+      "label": "Lint",
+      "type": "npm",
+      "script": "lint",
+      "group": "test",
+      "detail": "Runs ESLint"
+    },
+    {
+      "label": "Disable husky",
+      "type": "npm",
+      "script": "unsafe",
+      "group": "none",
+      "detail": "Unsets Git hooks path"
+    }
+  ]
+}

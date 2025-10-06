@@ -137,7 +137,7 @@ app.post('/composer', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log(`\nFaStQL GUI connected. Session ID: ${socket.id}`);
+  console.log(`\nFaStQL client connected. Session ID: ${socket.id}`);
 
   // Spawn the terminal (for each client)
   let sqlcl;

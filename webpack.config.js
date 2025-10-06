@@ -5,6 +5,7 @@ module.exports = {
     terminal: './src/frontend/terminal.js',
     version: './src/frontend/version.js',
     composer: './src/frontend/composer.js',
+    scripter: './src/frontend/scripter.js',
     alert: './src/frontend/alert.js',
   },
   output: {

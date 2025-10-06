@@ -31,6 +31,7 @@
 
     <div class="control">
       <button id="openSqlEditorBtn" title="SQL Editor">COMPOSER</button>
+      <button id="openScripterBtn" title="SQL Submission script generator">SCRIPTER</button>
     </div>
 
     <div class="control">
@@ -99,9 +100,23 @@
     <div class="resize-handle"></div>
   </div>
 
+  <div id="scripterWindow" class="sql-editor-window">
+    <div class="sql-editor-titlebar">
+      <span>Scripter (by db.bme.hu)</span>
+      <button class="close-btn">&times;</button>
+    </div>
+    <iframe 
+      src="https://db.bme.hu/files/szoftlab5/sql/oracle/sql123-beadando-generator.html"
+      id="scripterIframe"
+    ></iframe>
+    <div class="resize-handle"></div>
+  </div>
+
   <script src="terminal.bundle.js"></script>
   <script src="version.bundle.js"></script>
- <script src="alert.bundle.js"></script>
+  <script src="alert.bundle.js"></script>
+  <script src="composer.bundle.js"></script>
+  <script src="scripter.bundle.js"></script>
   <script>
     const title = document.getElementById('title');
     title.addEventListener('click', () => location.reload());

@@ -130,6 +130,10 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
 
   - Use Composer to create and manage multi-line SQL commands. You can save them, load them, and execute them.
 
+- **SCRIPTER**
+
+  - A [utility](https://db.bme.hu/files/szoftlab5/sql/oracle/sql123-beadando-generator.html) provided by db.bme.hu for creating SQL scripts required for submission on SQL1-2-3 labs.
+
 - **CLEAR**
 
   - This button clears the console.
@@ -162,5 +166,7 @@ The bottom toolbar serves as a help menu, providing quick access to course mater
 
 `sqlcl` is licensed under the Oracle Free Use Terms and Conditions.
 The full text of this license is published [here](https://www.oracle.com/downloads/licenses/oracle-free-license.html).
+
+The SQL script generation functionality (`SCRIPTER`) utilizes resources provided by [db.bme.hu](db.bme.hu). The FaStQL project claims no ownership or credit.
 
 FaStQL (excluding `sqlcl`) is licensed under the [Apache 2.0 License](https://github.com/BrNi05/FaStQL/blob/main/LICENSE).

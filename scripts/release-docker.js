@@ -7,13 +7,15 @@ const dir = __dirname;
 const pkg = JSON.parse(readFileSync(path.join(dir, '../package.json'), 'utf-8'));
 const { version } = pkg;
 
-const tags = ['fastql:latest', 'brni05/fastql:latest', `brni05/fastql:${version}`];
+const tags = ['brni05/fastql:latest', `brni05/fastql:${version}`];
 
-console.log('\nBuilding Docker image with tags:', tags.join(', '), '\n');
-execSync(`docker build ${tags.map((t) => '-t ' + t).join(' ')} .`, { stdio: 'inherit' });
+execSync('docker buildx create --use || true', { stdio: 'inherit' });
 
-tags.slice(1).forEach((tag) => {
-  console.log('\nPushing Docker tag: ', tag);
-  execSync(`docker push ${tag}`, { stdio: 'inherit' });
-  console.log('Done pushing tag:', tag);
-});
+console.log('Building Docker image with tags: ', tags.join(', '));
+
+execSync(
+  `docker buildx build --platform linux/amd64,linux/arm64 ${tags.map(t => '-t ' + t).join(' ')} --push .`,
+  { stdio: 'inherit' }
+);
+
+console.log('Multi-platform build & push done.');

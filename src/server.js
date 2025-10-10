@@ -172,22 +172,20 @@ io.on('connection', (socket) => {
     const pathToFile = trimmedCmd.substring(6);
 
     // Handle spool command (create file if not exists)
-    if (trimmedCmd.startsWith('SPOOL ')) {
-      if (pathToFile !== 'OFF') {
-        try {
-          const dir = path.dirname(pathToFile);
-          if (dir && !fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true }); // sqlcl does not handle directory creation
-            socket.emit('output', `\r\nDirectory created: ${dir}\r\n`);
-          }
-          if (!fs.existsSync(pathToFile)) {
-            fs.writeFileSync(pathToFile, ''); // sqlcl handles file creation, but just to be sure
-            socket.emit('output', `\r\nSpool file created: ${pathToFile}\r\n`);
-          }
-        } catch {
-          socket.emit('output', `\r\nError creating directory for spool file: ${pathToFile}\r\n`);
-          console.error(`FaStQL: error creating directory for spool file: ${pathToFile}`);
+    if (trimmedCmd.startsWith('SPOOL ') && pathToFile !== 'OFF') {
+      try {
+        const dir = path.dirname(pathToFile);
+        if (dir && !fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true }); // sqlcl does not handle directory creation
+          socket.emit('output', `\r\nDirectory created: ${dir}\r\n`);
         }
+        if (!fs.existsSync(pathToFile)) {
+          fs.writeFileSync(pathToFile, ''); // sqlcl handles file creation, but just to be sure
+          socket.emit('output', `\r\nSpool file created: ${pathToFile}\r\n`);
+        }
+      } catch {
+        socket.emit('output', `\r\nError creating directory for spool file: ${pathToFile}\r\n`);
+        console.error(`FaStQL: error creating directory for spool file: ${pathToFile}`);
       }
     }
 

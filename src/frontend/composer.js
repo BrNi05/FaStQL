@@ -51,7 +51,7 @@ export function initSqlEditor(socket) {
   });
 
   // Save SQL button
-  saveSqlBtn.addEventListener('click', () => {
+  saveSqlBtn.addEventListener('click', async () => {
     const filename = document.getElementById('saveSqlInput').value.trim();
     if (!filename) return showAlert('Composer Error', 'No filename provided.');
     if (filename.includes('/') || filename.includes('\\') || filename.includes('.'))
@@ -60,7 +60,7 @@ export function initSqlEditor(socket) {
     const code = sqlEditorTextarea.value;
 
     try {
-      axios.post('/composer', {
+      await axios.post('/composer', {
         subPath: '',
         name: `${filename}.sql`,
         content: code,
@@ -120,6 +120,47 @@ export function initSqlEditor(socket) {
       sqlEditorTextarea.value = res.data.content;
     } catch (err) {
       console.error('FaStQL: failed to load SQL script', err);
+    }
+  });
+
+  // Use Tab for identing
+  sqlEditorTextarea.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+
+      const start = sqlEditorTextarea.selectionStart;
+      const end = sqlEditorTextarea.selectionEnd;
+
+      const indent = '  ';
+      sqlEditorTextarea.value =
+        sqlEditorTextarea.value.substring(0, start) + indent + sqlEditorTextarea.value.substring(end);
+
+      sqlEditorTextarea.selectionStart = sqlEditorTextarea.selectionEnd = start + indent.length;
+    }
+  });
+
+  // Auto identation on new line
+  sqlEditorTextarea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+
+      const value = sqlEditorTextarea.value;
+      const start = sqlEditorTextarea.selectionStart;
+      const end = sqlEditorTextarea.selectionEnd;
+
+      // Current line
+      const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+      const lineEnd = value.indexOf('\n', start);
+      const lineText = value.substring(lineStart, lineEnd === -1 ? value.length : lineEnd);
+      const leadingSpaces = lineText.match(/^\s*/)[0];
+
+      // New line
+      const newValue = value.substring(0, start) + '\n' + leadingSpaces + value.substring(end);
+      sqlEditorTextarea.value = newValue;
+
+      // Move cursor
+      const newPos = start + 1 + leadingSpaces.length;
+      sqlEditorTextarea.selectionStart = sqlEditorTextarea.selectionEnd = newPos;
     }
   });
 

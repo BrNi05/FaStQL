@@ -91,7 +91,7 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
 > [!IMPORTANT]
 > Since FaStQL runs in a Docker container, a volume mount is needed to exchange data between the host and the container, which is done in the compose config.
 >
-> As soon as you start the container, a folder named `output` will appear in the PWD.
+> As soon as you start the container, a folder named `output` will appear in the CWD.
 >
 > The same folder exists in the container as well: `/fastql/output`.
 >
@@ -108,7 +108,7 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
 
   - For the first time, enter your username and password.
     - FaStQL will remember your credentials for future use - just press Enter next time to auto-fill the fields.
-    - The connection string format is: `uname/psw@//rapid.eik.bme.hu:1521/szglab`.
+    - The connection string format is: `username/password@//rapid.eik.bme.hu:1521/szglab`.
   - Press CONNECT.
 
 - **RUN**

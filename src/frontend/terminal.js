@@ -91,7 +91,8 @@ function sendConnect() {
   }
 
   // If the user provides no password, use the stored one or fallback to default password
-  if (!password) {
+  if (!password || /^\*+$/.test(password)) {
+    // Do not accidentally save the masked password
     password = localStorage.getItem('lastPassword') || username.toUpperCase();
   }
 
@@ -100,9 +101,6 @@ function sendConnect() {
 
   // Save the last used username and password to localStorage
   localStorage.setItem('lastUsername', username);
-  if (!/^\*+$/.test(password)) {
-    localStorage.setItem('lastPassword', password); // Do not accidentally save the masked password
-  }
 
   // Send the CONNECT command to the server
   sendCommand(`CONNECT ${url}`);

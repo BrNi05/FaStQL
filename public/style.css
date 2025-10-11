@@ -330,46 +330,11 @@ body {
   font-size: 14px;
 }
 
-/* Textarea for SQL code */
-#sqlEditorTextarea {
+/* Monaco Editor container for SQL code */
+#sqlEditorContainer {
   flex: 1;
   width: 100%;
-  background: #1c1c1c;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  resize: none;
-  font-family: 'Fira Code', monospace;
-  font-size: 14px;
-  overflow: auto;
-  scrollbar-width: none;
-}
-
-/* Resize handle */
-.sql-editor-window .resize-handle {
-  width: 12px;
-  height: 12px;
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  cursor: se-resize;
-  z-index: 3000;
-  background: transparent;
-}
-
-.sql-editor-window .resize-handle::after {
-  content: '⇘';
-  font-size: 14px;
-  color: #888;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  pointer-events: none;
-}
-
-/* Scrollbar styling for Composer textarea */
-#sqlEditorTextarea::-webkit-scrollbar {
-  display: none;
+  height: 400px;
 }
 
 /* Scripter window */
@@ -387,10 +352,19 @@ body {
   background: #1c1c1c;
 }
 
-#scripterWindow .resize-handle {
+.scripterWindow .resize-handle,
+.sql-editor-window .resize-handle {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  cursor: se-resize;
+  z-index: 3000;
   background: transparent;
 }
 
-#scripterWindow .resize-handle::after {
+.scripterWindow .resize-handle::after,
+.sql-editor-window .resize-handle::after {
   content: none;
 }

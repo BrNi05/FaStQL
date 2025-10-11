@@ -86,16 +86,12 @@
       <input type="text" id="saveSqlInput" placeholder=""/>
       <button id="saveSqlBtn">SAVE</button>
       <button id="runSqlBtn">RUN</button>
+      <button id="commitSqlBtn">COMMIT</button>
+      <button id="rollbackSqlBtn">ROLLBACK</button>
+      <button id="clearSqlBtn">CLEAR</button>
     </div>
   
-    <textarea
-      id="sqlEditorTextarea"
-      placeholder=""
-      spellcheck="false"
-      autocorrect="off"
-      autocapitalize="off"
-      autocomplete="off"
-    ></textarea>
+    <div id="sqlEditorContainer" style="width: 100%; height: 400px;"></div>
 
     <div class="resize-handle"></div>
   </div>

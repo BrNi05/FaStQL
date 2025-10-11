@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { showAlert } from './alert.js';
+import * as monaco from 'monaco-editor';
 
 export function initSqlEditor(socket) {
   // Elements
@@ -10,7 +11,9 @@ export function initSqlEditor(socket) {
   const dropdown = document.getElementById('sqlFileDropdown');
   const runSqlBtn = document.getElementById('runSqlBtn');
   const saveSqlBtn = document.getElementById('saveSqlBtn');
-  const sqlEditorTextarea = document.getElementById('sqlEditorTextarea');
+  const commitSqlBtn = document.getElementById('commitSqlBtn');
+  const rollbackSqlBtn = document.getElementById('rollbackSqlBtn');
+  const clearSqlBtn = document.getElementById('clearSqlBtn');
 
   // Hide window initially
   sqlEditorWindow.style.display = 'none';
@@ -29,9 +32,43 @@ export function initSqlEditor(socket) {
     sqlEditorWindow.style.display = 'none';
   });
 
+  // Set up Monaco Editor
+  const editor = monaco.editor.create(document.getElementById('sqlEditorContainer'), {
+    value: '',
+    language: 'sql',
+    theme: 'vs-dark',
+    automaticLayout: true,
+    tabSize: 2,
+    insertSpaces: true,
+    minimap: { enabled: false },
+    cursorBlinking: 'smooth',
+    formatOnPaste: true,
+    formatOnType: true,
+    scrollbar: {
+      vertical: 'visible',
+      horizontal: 'visible',
+      alwaysConsumeMouseWheel: false,
+    },
+    quickSuggestions: {
+      other: true,
+      comments: false,
+      strings: true,
+    },
+    wordBasedSuggestions: true,
+    suggestOnTriggerCharacters: true,
+    lineDecorationsWidth: 2,
+    lineNumbersMinChars: 5,
+    wordWrap: 'on',
+    wrappingIndent: 'same',
+    padding: {
+      top: 8,
+      bottom: 0,
+    },
+  });
+
   // Run SQL button sends textarea content to server
   runSqlBtn.addEventListener('click', async () => {
-    const sqlCode = sqlEditorTextarea.value.trim();
+    const sqlCode = editor.getValue().trim();
     if (!sqlCode) return showAlert('Composer Error', 'No SQL code to run.');
 
     const tempFilename = `temp_${Date.now()}.sql`;
@@ -57,7 +94,7 @@ export function initSqlEditor(socket) {
     if (filename.includes('/') || filename.includes('\\') || filename.includes('.'))
       return showAlert('Composer Error', 'Provide only the filename without path or extension.');
 
-    const code = sqlEditorTextarea.value;
+    const code = editor.getValue();
 
     try {
       await axios.post('/composer', {
@@ -117,51 +154,26 @@ export function initSqlEditor(socket) {
 
     try {
       const res = await axios.get(`/composer/${selected}`);
-      sqlEditorTextarea.value = res.data.content;
+      editor.setValue(res.data.content);
+      document.getElementById('saveSqlInput').value = selected.replace('.sql', '');
     } catch (err) {
       console.error('FaStQL: failed to load SQL script', err);
     }
   });
 
-  // Use Tab for identing
-  sqlEditorTextarea.addEventListener('keydown', (e) => {
-    if (e.key === 'Tab') {
-      e.preventDefault();
-
-      const start = sqlEditorTextarea.selectionStart;
-      const end = sqlEditorTextarea.selectionEnd;
-
-      const indent = '  ';
-      sqlEditorTextarea.value =
-        sqlEditorTextarea.value.substring(0, start) + indent + sqlEditorTextarea.value.substring(end);
-
-      sqlEditorTextarea.selectionStart = sqlEditorTextarea.selectionEnd = start + indent.length;
-    }
+  // Commit button
+  commitSqlBtn.addEventListener('click', () => {
+    socket.emit('toolbar', 'COMMIT;');
   });
 
-  // Auto identation on new line
-  sqlEditorTextarea.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
+  // Rollback button
+  rollbackSqlBtn.addEventListener('click', () => {
+    socket.emit('toolbar', 'ROLLBACK;');
+  });
 
-      const value = sqlEditorTextarea.value;
-      const start = sqlEditorTextarea.selectionStart;
-      const end = sqlEditorTextarea.selectionEnd;
-
-      // Current line
-      const lineStart = value.lastIndexOf('\n', start - 1) + 1;
-      const lineEnd = value.indexOf('\n', start);
-      const lineText = value.substring(lineStart, lineEnd === -1 ? value.length : lineEnd);
-      const leadingSpaces = lineText.match(/^\s*/)[0];
-
-      // New line
-      const newValue = value.substring(0, start) + '\n' + leadingSpaces + value.substring(end);
-      sqlEditorTextarea.value = newValue;
-
-      // Move cursor
-      const newPos = start + 1 + leadingSpaces.length;
-      sqlEditorTextarea.selectionStart = sqlEditorTextarea.selectionEnd = newPos;
-    }
+  // Clear button
+  clearSqlBtn.addEventListener('click', () => {
+    editor.setValue('');
   });
 
   // Window dragging
@@ -200,16 +212,14 @@ export function initSqlEditor(socket) {
 
   document.addEventListener('mousemove', (e) => {
     if (!isResizing) return;
-    const minWidth = 418;
-    const minHeight = 300;
     const maxWidth = window.innerWidth - sqlEditorWindow.offsetLeft - 10;
     const maxHeight = window.innerHeight - sqlEditorWindow.offsetTop - 10;
 
     let newWidth = e.clientX - sqlEditorWindow.offsetLeft;
     let newHeight = e.clientY - sqlEditorWindow.offsetTop;
 
-    sqlEditorWindow.style.width = Math.min(Math.max(newWidth, minWidth), maxWidth) + 'px';
-    sqlEditorWindow.style.height = Math.min(Math.max(newHeight, minHeight), maxHeight) + 'px';
+    sqlEditorWindow.style.width = Math.min(Math.max(newWidth, 665), maxWidth) + 'px';
+    sqlEditorWindow.style.height = Math.min(Math.max(newHeight, 400), maxHeight) + 'px';
   });
 
   document.addEventListener('mouseup', () => {

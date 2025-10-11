@@ -70,7 +70,7 @@ Open a terminal in the folder you just created (this should be your current work
 To start FaStQL: `docker compose up -d`.
 
 > [!TIP]
-> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual. The compressed image is about 370 MB, and it expands to 1.3 GB once extracted.
+> The FaStQL image is relatively large due to technical constraints, so downloading it may take a bit longer than usual.
 
 > [!TIP]
 > You can view container logs using Docker Desktop.
@@ -102,14 +102,19 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
 - A psueod-terminal is rendered in the center of the screen with `sqlcl` already running.
 - You can open multiple FaStQL instances in separate windows, each providing a fresh terminal.
 
+> [!TIP]
+> Use `Ctrl + C` and `Ctrl + Shift + V` key combinations or the right-click menu to perform copy and paste actions. `Ctrl + V` is buggy (and does not paste) - avoid using it.
+>
+> `Ctrl + Shift + C` also triggers a copy action, but opens the browser inspector as well.
+
 **Top toolbar:**
 
 - **CONNECT**
 
   - For the first time, enter your username and password.
-    - FaStQL will remember your credentials for future use - just press Enter next time to auto-fill the fields.
+    - FaStQL will remember your credentials for future use - just press Enter or the **Connect** button the next time to auto-fill the fields.
     - The connection string format is: `username/password@//rapid.eik.bme.hu:1521/szglab`.
-  - Press CONNECT.
+  - If the session expires (eg. due to inactivity) just press **Connect** again.
 
 - **RUN**
 
@@ -130,18 +135,19 @@ It will take a few seconds for `sqlcl` to start, but you should see the default 
 
   - Use Composer to create and manage multi-line SQL commands. You can save them, load them, and execute them.
 
+> [!TIP]
+> Certain SQL commands require a commit to take effect in the database. To undo changes (before committing), use rollback. There are dedicated buttons for both actions.
+
 - **SCRIPTER**
 
   - A [utility](https://db.bme.hu/files/szoftlab5/sql/oracle/sql123-beadando-generator.html) provided by [db.bme.hu](https://db.bme.hu) for creating SQL scripts required for submission on SQL1-2-3 labs.
 
+> [!TIP]
+> You can resize FaStQL sub-windows by dragging their bottom-right corner.
+
 - **CLEAR**
 
   - This button clears the console.
-
-> [!TIP]
-> Use `Ctrl + C` and `Ctrl + Shift + V` key combinations or the right-click menu to perform copy and paste actions. `Ctrl + V` is buggy (and does not paste) - avoid using it.
->
-> `Ctrl + Shift + C` also triggers a copy action, but opens the browser inspector as well.
 
 **Bottom toolbar:**
 
@@ -170,3 +176,6 @@ The full text of this license is published [here](https://www.oracle.com/downloa
 The SQL script generation functionality (`SCRIPTER`) utilizes resources provided by [db.bme.hu](https://db.bme.hu). The FaStQL project claims no ownership or credit.
 
 FaStQL (excluding `sqlcl`) is licensed under the [Apache 2.0 License](https://github.com/BrNi05/FaStQL/blob/main/LICENSE).
+
+This project bundles Monaco Editor by Microsoft Corporation, licensed under the MIT License.
+A copy of the Monaco Editor license is available [here](https://github.com/microsoft/monaco-editor/blob/main/LICENSE.txt).

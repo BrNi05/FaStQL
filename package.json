@@ -1,6 +1,6 @@
 {
   "name": "fastql",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "main": "src/server.js",
   "bin": "src/server.js",
   "scripts": {
@@ -45,18 +45,23 @@
     "axios": "^1.12.2",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "monaco-editor": "^0.54.0",
     "node-pty": "^1.1.0-beta35",
     "semver": "^7.7.3",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
+    "css-loader": "^7.1.2",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.5.3",
     "husky": "^9.1.7",
+    "monaco-editor-webpack-plugin": "^7.1.1",
     "prettier": "^3.6.2",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.14",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
   }

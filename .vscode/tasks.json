@@ -5,71 +5,84 @@
       "label": "Start FaStQL",
       "type": "npm",
       "script": "start",
-      "group": "build",
-      "detail": "Runs webpack and starts the Node.js server"
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Runs webpack and starts the Node.js server",
+      "problemMatcher": []
     },
     {
       "label": "Build with Webpack",
       "type": "npm",
       "script": "webpack",
       "group": "build",
-      "detail": "Runs webpack manually"
+      "detail": "Runs webpack manually",
+      "problemMatcher": []
     },
     {
       "label": "Docker: Build",
       "type": "npm",
       "script": "docker:build",
       "group": "build",
-      "detail": "Builds Docker image after webpack"
+      "detail": "Builds Docker image after webpack",
+      "problemMatcher": []
     },
     {
       "label": "Docker: Start",
       "type": "npm",
       "script": "docker:up",
       "group": "none",
-      "detail": "Starts the Docker container"
+      "detail": "Starts the Docker container",
+      "problemMatcher": []
     },
     {
       "label": "Docker: Stop",
       "type": "npm",
       "script": "docker:down",
       "group": "none",
-      "detail": "Stops and removes the Docker container"
+      "detail": "Stops and removes the Docker container",
+      "problemMatcher": []
     },
     {
       "label": "Docker: Prune",
       "type": "npm",
       "script": "docker:prune",
       "group": "none",
-      "detail": "Cleans up dangling Docker images and cache"
+      "detail": "Cleans up dangling Docker images and cache",
+      "problemMatcher": []
     },
     {
       "label": "Release: Docker",
       "type": "npm",
       "script": "release:docker",
       "group": "build",
-      "detail": "Runs the full release process for Docker. Used in CI/CD pipeline."
+      "detail": "Runs the full release process for Docker. Used in CI/CD pipeline.",
+      "problemMatcher": []
     },
     {
       "label": "Format",
       "type": "npm",
       "script": "format",
       "group": "none",
-      "detail": "Formats JS, JSON, and Markdown files using Prettier"
+      "detail": "Formats JS, JSON, and Markdown files using Prettier",
+      "problemMatcher": []
     },
     {
       "label": "Lint",
       "type": "npm",
       "script": "lint",
       "group": "test",
-      "detail": "Runs ESLint"
+      "detail": "Runs ESLint",
+      "problemMatcher": ["$eslint-stylish"]
     },
     {
       "label": "Disable husky",
       "type": "npm",
       "script": "unsafe",
       "group": "none",
-      "detail": "Unsets Git hooks path"
+      "detail": "Unsets Git hooks path",
+      "problemMatcher": []
     }
   ]
 }

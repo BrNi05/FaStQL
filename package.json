@@ -46,7 +46,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "monaco-editor": "^0.54.0",
-    "node-pty": "^1.1.0-beta37",
+    "node-pty": "^1.1.0-beta39",
     "semver": "^7.7.3",
     "socket.io": "^4.8.1"
   },

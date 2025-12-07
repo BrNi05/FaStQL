@@ -133,12 +133,12 @@ export function initSqlEditor(socket) {
         defaultOption.textContent = '-- Select a script --';
         dropdown.appendChild(defaultOption);
 
-        files.forEach((file) => {
+        for (const file of files) {
           const option = document.createElement('option');
           option.value = file + '.sql';
           option.textContent = file;
           dropdown.appendChild(option);
-        });
+        }
       }
     } catch (err) {
       console.error('FaStQL: failed to load SQL files', err);

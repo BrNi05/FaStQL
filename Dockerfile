@@ -1,4 +1,4 @@
-FROM node:lts-bookworm-slim
+FROM node:lts-trixie-slim
 
 WORKDIR /fastql
 
@@ -7,7 +7,7 @@ COPY package*.json ./
 # Install Java and build tools for node-pty
 RUN apt-get update -qq && \
     apt-get install -y -qq --no-install-recommends \
-    openjdk-17-jre-headless python3 g++ make >/dev/null \
+    default-jre-headless python3 g++ make >/dev/null \
     && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 # Production release

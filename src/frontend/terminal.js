@@ -101,6 +101,7 @@ function sendConnect() {
 
   // Save the last used username and password to localStorage
   localStorage.setItem('lastUsername', username);
+  localStorage.setItem('lastPassword', password);
 
   // Send the CONNECT command to the server
   sendCommand(`CONNECT ${url}`);

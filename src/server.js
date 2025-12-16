@@ -3,15 +3,15 @@ require('dotenv').config({ quiet: true });
 
 // Networking
 const express = require('express');
-const http = require('http');
+const http = require('node:http');
 const { Server } = require('socket.io');
 
 // Pseudo-terminal
 const pty = require('node-pty');
 
 // Paths and FS
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 
 // .env validation
 const SQLCL_PATH = process.env.SQLCL_PATH;

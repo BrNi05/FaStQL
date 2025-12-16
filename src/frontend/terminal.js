@@ -107,7 +107,7 @@ function sendConnect() {
 
   // Update input fields to reflect the user values
   userInputElement.value = username;
-  pwdInputElement.value = password.replace(/./g, '*');
+  pwdInputElement.value = password.replaceAll(/./g, '*');
 }
 
 // Toolbar - run script

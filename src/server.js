@@ -75,7 +75,7 @@ app.get('/version', async (req, res) => {
     const dockerRes = await fetch(
       'https://hub.docker.com/v2/repositories/brni05/fastql/tags?page_size=1&page=1&ordering=last_updated'
     );
-    if (!dockerRes.ok) throw new Error();
+    if (!dockerRes.ok) throw new Error('Docker Hub API request failed.');
 
     const jsonDocker = await dockerRes.json();
     const latest = jsonDocker.results[0].name;
@@ -193,7 +193,7 @@ io.on('connection', (socket) => {
     if (trimmedCmd.startsWith('START ')) {
       try {
         let content = fs.readFileSync(pathToFile, 'utf-8');
-        content = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+        content = content.replaceAll(/\r\n/g, '\n').replaceAll(/\r/g, '\n');
         fs.writeFileSync(pathToFile, content, 'utf-8');
       } catch {
         console.error(`FaStQL: error normalizing line endings for script: ${pathToFile}`);

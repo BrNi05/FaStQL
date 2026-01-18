@@ -57,7 +57,7 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-prettier": "^5.5.5",
     "husky": "^9.1.7",
     "monaco-editor-webpack-plugin": "^7.1.1",
     "prettier": "^3.8.0",

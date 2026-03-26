@@ -40,30 +40,31 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "@xterm/addon-fit": "^0.10.0",
-    "@xterm/xterm": "^5.5.0",
-    "axios": "^1.13.2",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.0",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "axios": "^1.13.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
     "monaco-editor": "^0.55.1",
-    "node-pty": "^1.1.0-beta39",
-    "semver": "^7.7.3",
-    "socket.io": "^4.8.1"
+    "node-pty": "^1.1.0",
+    "semver": "^7.7.4",
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "baseline-browser-mapping": "^2.9.8",
-    "css-loader": "^7.1.2",
-    "eslint": "^9.39.1",
+    "baseline-browser-mapping": "^2.10.0",
+    "css-loader": "^7.1.3",
+    "eslint": "^10.0.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.4.0",
     "husky": "^9.1.7",
     "monaco-editor-webpack-plugin": "^7.1.1",
-    "prettier": "^3.7.3",
+    "prettier": "^3.8.1",
     "style-loader": "^4.0.0",
-    "terser-webpack-plugin": "^5.3.14",
-    "webpack": "^5.103.0",
+    "terser-webpack-plugin": "^5.3.16",
+    "webpack": "^5.104.1",
     "webpack-cli": "^6.0.1"
   }
 }

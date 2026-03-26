@@ -24,7 +24,7 @@ RUN chmod +x /fastql/external/sqlcl/bin/sql
 
 ENV NODE_ENV=production
 
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-arm64/bin/java
 
 ENV PATH="$JAVA_HOME/bin:$PATH"
 

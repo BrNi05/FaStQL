@@ -1,6 +1,6 @@
 {
   "name": "fastql",
-  "version": "1.2.0",
+  "version": "1.1.1",
   "main": "src/server.js",
   "bin": "src/server.js",
   "scripts": {

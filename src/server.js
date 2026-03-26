@@ -48,6 +48,23 @@ if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
 if (!fs.existsSync(composerDir)) fs.mkdirSync(composerDir);
 if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
 
+// Validate and resolve composer paths to prevent directory traversal
+function resolveComposerPath(subPath, name) {
+  if (subPath !== '' && subPath !== '.temp') throw new Error('Invalid composer path');
+  if (!name || name !== path.basename(name)) throw new Error('Invalid composer filename');
+  if (name === '.' || name === '..') throw new Error('Invalid composer filename');
+
+  const dir = subPath === '.temp' ? tempDir : composerDir;
+  const resolvedDir = path.resolve(dir);
+  const resolvedPath = path.resolve(dir, name);
+
+  if (resolvedPath !== path.join(resolvedDir, name)) {
+    throw new Error('Invalid composer filename');
+  }
+
+  return resolvedPath;
+}
+
 // Clear output/.composer/.temp dir on startup
 function clearTempDir() {
   fs.readdirSync(tempDir).forEach((file) => {
@@ -75,7 +92,7 @@ app.get('/version', async (req, res) => {
     const dockerRes = await fetch(
       'https://hub.docker.com/v2/repositories/brni05/fastql/tags?page_size=1&page=1&ordering=last_updated'
     );
-    if (!dockerRes.ok) throw new Error();
+    if (!dockerRes.ok) throw new Error('Docker Hub API request failed.');
 
     const jsonDocker = await dockerRes.json();
     const latest = jsonDocker.results[0].name;
@@ -105,8 +122,13 @@ app.get('/composer', (req, res) => {
 // Composer GET endpoint (file content)
 app.get('/composer/:filename', (req, res) => {
   const { filename } = req.params;
+  let filePath;
 
-  const filePath = path.join(__dirname, '..', 'output', '.composer', filename);
+  try {
+    filePath = resolveComposerPath('', filename);
+  } catch {
+    return res.sendStatus(400);
+  }
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -121,10 +143,13 @@ app.get('/composer/:filename', (req, res) => {
 // Composer POST endpoint
 app.post('/composer', (req, res) => {
   const { subPath, name, content } = req.body;
+  let targetPath;
 
-  const baseDir = path.join(__dirname, '..', 'output', '.composer');
-  const targetDir = path.join(baseDir, subPath);
-  const targetPath = path.join(targetDir, name);
+  try {
+    targetPath = resolveComposerPath(subPath, name);
+  } catch {
+    return res.sendStatus(400);
+  }
 
   fs.writeFile(targetPath, content, 'utf8', (err) => {
     if (err) {
@@ -193,7 +218,7 @@ io.on('connection', (socket) => {
     if (trimmedCmd.startsWith('START ')) {
       try {
         let content = fs.readFileSync(pathToFile, 'utf-8');
-        content = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+        content = content.replaceAll(/\r\n/g, '\n').replaceAll(/\r/g, '\n');
         fs.writeFileSync(pathToFile, content, 'utf-8');
       } catch {
         console.error(`FaStQL: error normalizing line endings for script: ${pathToFile}`);

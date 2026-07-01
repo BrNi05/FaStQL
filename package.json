@@ -65,7 +65,7 @@
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.16",
     "webpack": "^5.104.1",
-    "webpack-cli": "^7.0.2"
+    "webpack-cli": "^7.1.0"
   },
   "overrides": {
     "dompurify": "^3.4.2"
